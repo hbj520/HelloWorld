@@ -1,0 +1,21 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>{{ user.name }}'s list</title>-->
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">-->
+<!--</head>-->
+<!--<body>-->
+<!--   <img class="bgIcon" src="{{ url_for('static',filename='testIcon.png') }}">-->
+<!--   <h1>{{ user.name }}'s list</h1>-->
+<!--   <h2>Page Not Found - 404</h2>-->
+<!--</body>-->
+<!--</html>-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+   <img class="bgIcon" src="{{ url_for('static',filename='testIcon.png') }}">
+   <h1>{{ user.name }}'s list</h1>
+   <h2>Page Not Found - 404</h2>
+{% endblock %}

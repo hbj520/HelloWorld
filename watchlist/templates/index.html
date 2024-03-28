@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.name }}'s list</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+</head>
+<body>
+<img class="bgIcon" src="{{ url_for('static',filename='testIcon.png') }}">
+<h2>{{ user.name }}'s list</h2>
+{# 使用 length 过滤器获取 movies 变量的长度 #}
+<p>{{ movies|length }} Titles</p>
+<ul>
+    {% for movie in movies %} {#迭代 movies 变量 #}
+    <li>{{ movie.title }} - {{ movie.year }}
+        {% if current_user.is_authenticated %}
+        <a class="btn" href="{{ url_for('edit', movie_id=movie.id) }}">Edit</a>
+        <form class="inline-form" method="post" action="{{ url_for('delete', movie_id=movie.id) }}">
+        <input class="btn" type="submit" name="delete" value="Delete" onclick="return confirm('Are you sure?')">
+        </form>
+        {% endif %}
+    </li>
+
+    {#等同于 movie['title] #}
+    {% endfor %} {# 使用 endfor 标签结束 for 语句 #}
+</ul>
+<!-- 在模板中可以直接使用 current_user 变量 -->
+{% if current_user.is_authenticated %}
+<form method="post">
+    Name <input type="text" name="title" autocomplete="off" required>
+    Year <input type="text" name="year" autocomplete="off" required>
+    <input class="btn" type="submit" name="submit" value="Add">
+</form>
+{% endif %}
+
+{% if current_user.is_authenticated %}
+    <li><a href="{{ url_for('settings') }}">Settings</a></li>
+    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+{% else %}
+    <li><a href="{{ url_for('login') }}">Login</a></li>
+{% endif %}
+</body>
+</html>
