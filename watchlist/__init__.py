@@ -11,6 +11,7 @@ prefix = 'sqlite:////'
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = prefix + os.path.join(os.path.dirname(app.root_path), os.getenv('DATABASE_FILE', 'data.db'))
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)  # 实例化扩展类
