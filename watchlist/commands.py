@@ -41,7 +41,7 @@ def admin(username, password):
     if user is not None:
         click.echo('UPdating user...')
         user.username = username
-        user.set_passwoard(password)
+        user.set_password(password)
     else:
         click.echo('Creating user...')
         user = User(username=username, name='Admin')
